@@ -1,0 +1,675 @@
+<giproject version="4.0">
+	<languages>
+		<language id="DEU"/>
+		<language id="ENU"/>
+		<language id="RUS"/>
+		<language id="DEU" pluginid="CustomUI"/>
+		<language id="ENU" pluginid="CustomUI"/>
+		<language id="RUS" pluginid="CustomUI"/>
+	</languages>
+	<packages>
+		<package filename="atsetup" main="1">
+			<components>
+				<component dst="%InstallPath%" id="{534DB2F5-8FD4-4EC8-8B78-7D35362CE94B}" name="Main">
+					<files>
+						<file dst="atools.exe" src="D:\Work\Programs\ATools\atools.exe"/>
+						<file dst="atools.dll" src="D:\Work\Programs\ATools\atools.dll"/>
+					</files>
+					<registry>
+						<reg key="HKLM\Software\%CompanyName%\%AppName%" value="%InstallPath%"/>
+						<reg key="HKCU\Software\%CompanyName%\%AppName%" param="Language" value="%LangId%"/>
+					</registry>
+					<runapps>
+						<runapp arg="/install" cmdline="%InstallPath%\atools.exe" showcmd="hide"/>
+						<runapp cmdline="%InstallPath%\atools.exe" flags="dont_wait"/>
+						<runapp arg="/uninstall" cmdline="%InstallPath%\atools.exe" showcmd="hide" whenstart="before_uninstall"/>
+					</runapps>
+					<shortcuts>
+						<shortcut cmdline="%InstallPath%\atools.exe" description="The easy way to work!" iconfile="%InstallPath%\atools.exe" name="%CommonProgramsMenu%\%AppName%" workdir="%InstallPath%"/>
+					</shortcuts>
+				</component>
+			</components>
+			<plugins>
+				<plugin id="CustomUI">
+					<customconfig>
+						<install>
+							<before condition="%SilentMode%=0">
+								<window bordericons="systemmenu" caption="[All.Dialogs.Caption.Install]" font="MS Sans Serif,8,$00000000,[]" height="385" id="DLG_LANGUAGES" left="0" name="Languages" top="0" visible="1" width="518">
+									<controls>
+										<label autosize="0" caption="[Dlg.Language.DlgText]" font="MS Sans Serif,8,$00000000,[]" height="32" id="CUILabel3" left="23" name="CUILabel3" top="72" width="465">
+											<alignment valign="avbottom"/>
+											<shadow/>
+										</label>
+										<languagelist font="MS Sans Serif,8,$00000000,[]" height="171" id="CUILanguageListBox1" left="23" name="CUILanguageListBox1" top="113" width="465">
+											<scrollbars/>
+										</languagelist>
+										<url caption="%UrlText%" font="MS Sans Serif,8,$00FF0000,[]" height="13" hoverfont="MS Sans Serif,8,$00800080,[U]" id="CUIUrl1" left="23" name="CUIUrl1" top="305" url="%UrlLink%" useparentfont="0" width="54">
+											<paddings leftpadding="2" rightpadding="2"/>
+											<properties>
+												<property id="Caption" name="URL Name"/>
+												<property id="URL" name="URL Location"/>
+											</properties>
+										</url>
+										<banner color="16777215" height="64" id="CUIBanner1" imagename="%Presetup%\banner.bmp" left="0" name="CUIBanner1" top="0" width="510">
+											<imageposition imagealignment="iatopright"/>
+											<properties>
+												<property id="ImageName" name="Banner Bitmap" type="bitmap"/>
+											</properties>
+											<subtitle caption="[Dlg.Language.SubTitle]" font="MS Sans Serif,8,$00000000,[]"/>
+											<title caption="[Dlg.Language.Title]" font="MS Sans Serif,8,$00000000,[B]"/>
+										</banner>
+										<button anchors="right,bottom" caption="[All.Dialogs.Btn.Next]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnNext" left="339" name="CUIButton2" sdpeh="ShowNext" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<button anchors="right,bottom" cancel="1" caption="[All.Dialogs.Btn.Cancel]" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnCancel" left="425" name="CUIButton1" sdpeh="CancelSetupAsk" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<line anchors="left,right,bottom" id="CUILine1" left="0" linealign="lacustom" linelength="510" name="CUILine1" top="311"/>
+									</controls>
+									<engineevents/>
+									<gradient gradstartcolor="16711680"/>
+								</window>
+								<window bordericons="systemmenu" caption="[All.Dialogs.Caption.Install]" font="MS Sans Serif,8,$00000000,[]" height="385" id="DLG_LICENSE" left="0" name="License" top="0" visible="1" width="518">
+									<controls>
+										<button anchors="right,bottom" caption="[All.Dialogs.Btn.Back]" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnBack" left="264" name="CUIButton3" sdpeh="ShowPrev" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<url caption="%UrlText%" font="MS Sans Serif,8,$00FF0000,[]" height="13" hoverfont="MS Sans Serif,8,$00800080,[U]" id="CUIUrl1" left="23" name="CUIUrl1" top="305" url="%UrlLink%" useparentfont="0" width="54">
+											<paddings leftpadding="2" rightpadding="2"/>
+											<properties>
+												<property id="Caption" name="URL Name"/>
+												<property id="URL" name="URL Location"/>
+											</properties>
+										</url>
+										<line anchors="left,right,bottom" id="CUILine1" left="0" linealign="lacustom" linelength="510" name="CUILine1" top="311"/>
+										<checkbox caption="[Dlg.License.Checkbox.Agreement]" font="MS Sans Serif,8,$00000000,[]" id="CUICheckbox1" left="30" name="CUICheckbox1" top="276" width="457">
+											<alignment/>
+											<onstatechanged>
+												<action expression='SetProp("BtnNext.Enabled", GetProp("CUICheckbox1.Checked"))'/>
+												<action expression='SetVar("LicenseCheckboxChecked", GetProp("CUICheckbox1.checked"))'/>
+											</onstatechanged>
+										</checkbox>
+										<richedit font="MS Sans Serif,8,$00000000,[]" height="167" id="CUIRichEdit1" left="23" name="CUIRichEdit1" readonly="1" textfile="%PRESETUP%\readme.rtf" top="104" width="465">
+											<properties>
+												<property id="TextFile" name="License File" type="text"/>
+											</properties>
+											<scrolling autohscroll="0" vscroll="1"/>
+										</richedit>
+										<label autosize="0" caption="[Dlg.License.DlgText]" font="MS Sans Serif,8,$00000000,[]" height="32" id="CUILabel3" left="23" name="CUILabel3" top="72" width="465" wordbreak="1">
+											<alignment/>
+											<shadow/>
+										</label>
+										<banner color="16777215" height="64" id="CUIBanner1" imagename="%Presetup%\banner.bmp" left="0" name="CUIBanner1" top="0" width="510">
+											<imageposition imagealignment="iatopright"/>
+											<properties>
+												<property id="ImageName" name="Banner Bitmap" type="bitmap"/>
+											</properties>
+											<subtitle caption="[Dlg.License.SubTitle]" font="MS Sans Serif,8,$00000000,[]"/>
+											<title caption="[Dlg.License.Title]" font="MS Sans Serif,8,$00000000,[B]"/>
+										</banner>
+										<button anchors="right,bottom" cancel="1" caption="[All.Dialogs.Btn.Cancel]" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnCancel" left="425" name="CUIButton1" sdpeh="CancelSetupAsk" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<button anchors="right,bottom" caption="[All.Dialogs.Btn.Next]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnNext" left="339" name="CUIButton2" sdpeh="ShowNext" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+									</controls>
+									<engineevents/>
+									<gradient gradstartcolor="16711680"/>
+									<oncreate>
+										<action expression='SetProp("BtnNext.Enabled", %LicenseCheckboxChecked%)'/>
+										<action expression='SetProp("CUICheckbox1.checked", %LicenseCheckboxChecked%)'/>
+									</oncreate>
+								</window>
+								<window bordericons="systemmenu" caption="[All.Dialogs.Caption.Install]" font="MS Sans Serif,8,$00000000,[]" height="385" id="DLG_INSTALLPATH" left="0" name="Installation Directory" top="0" visible="1" width="518">
+									<controls>
+										<label autosize="0" caption="[Dlg.Directory.DlgText]" font="MS Sans Serif,8,$00000000,[]" height="74" id="CUILabel4" left="23" name="CUILabel4" top="78" width="464" wordbreak="1">
+											<alignment/>
+											<shadow/>
+										</label>
+										<label caption="[Dlg.Directory.DlgText.SelectInstallFolder]" font="MS Sans Serif,8,$00000000,[]" height="13" id="CUILabel3" left="23" name="CUILabel3" top="174" width="196">
+											<alignment/>
+											<shadow/>
+										</label>
+										<button caption="[All.Dialogs.Btn.Browse]" font="MS Sans Serif,8,$00000000,[]" height="21" id="CUIButtonBrowse" left="412" top="198">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<path browsebutton="CUIButtonBrowse" browsedlgcaption="Browse For Folder" browsedlgprompt="Select folder for application install:" font="MS Sans Serif,8,$00000000,[]" height="21" id="CUIPathControl1" left="23" name="CUIPathControl1" top="198" varlink="InstallPath" width="384">
+											<scrolling/>
+										</path>
+										<url caption="%UrlText%" font="MS Sans Serif,8,$00FF0000,[]" height="13" hoverfont="MS Sans Serif,8,$00800080,[U]" id="CUIUrl1" left="23" name="CUIUrl1" top="305" url="%UrlLink%" useparentfont="0" width="54">
+											<paddings leftpadding="2" rightpadding="2"/>
+											<properties>
+												<property id="Caption" name="URL Name"/>
+												<property id="URL" name="URL Location"/>
+											</properties>
+										</url>
+										<banner color="16777215" height="64" id="CUIBanner1" imagename="%Presetup%\banner.bmp" left="0" name="CUIBanner1" top="0" width="510">
+											<imageposition imagealignment="iatopright"/>
+											<properties>
+												<property id="ImageName" name="Banner Bitmap" type="bitmap"/>
+											</properties>
+											<subtitle caption="[Dlg.Directory.SubTitle]" font="MS Sans Serif,8,$00000000,[]" wordbreakposition="405"/>
+											<title caption="[Dlg.Directory.Title]" font="MS Sans Serif,8,$00000000,[B]"/>
+										</banner>
+										<button anchors="right,bottom" caption="[All.Dialogs.Btn.Back]" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnBack" left="264" name="CUIButton3" sdpeh="ShowPrev" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<button anchors="right,bottom" caption="[All.Dialogs.Btn.Next]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnNext" left="339" name="CUIButton2" sdpeh="ShowNext" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<button anchors="right,bottom" cancel="1" caption="[All.Dialogs.Btn.Cancel]" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnCancel" left="425" name="CUIButton1" sdpeh="CancelSetupAsk" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<line anchors="left,right,bottom" id="CUILine1" left="0" linealign="lacustom" linelength="510" name="CUILine1" top="311"/>
+									</controls>
+									<engineevents/>
+									<gradient gradstartcolor="16711680"/>
+								</window>
+								<window bordericons="systemmenu" caption="[All.Dialogs.Caption.Install]" font="MS Sans Serif,8,$00000000,[]" height="385" id="DLG_STARTINSTALL" left="0" name="Start Installation" top="0" visible="1" width="518">
+									<controls>
+										<label autosize="0" caption="[Dlg.StartInstall.DlgText]" font="MS Sans Serif,8,$00000000,[]" height="174" id="CUILabel3" left="23" name="CUILabel3" top="98" width="465" wordbreak="1">
+											<alignment/>
+											<shadow/>
+										</label>
+										<url caption="%UrlText%" font="MS Sans Serif,8,$00FF0000,[]" height="13" hoverfont="MS Sans Serif,8,$00800080,[U]" id="CUIUrl1" left="23" name="CUIUrl1" top="305" url="%UrlLink%" useparentfont="0" width="54">
+											<paddings leftpadding="2" rightpadding="2"/>
+											<properties>
+												<property id="Caption" name="URL Name"/>
+												<property id="URL" name="URL Location"/>
+											</properties>
+										</url>
+										<banner color="16777215" height="64" id="CUIBanner1" imagename="%Presetup%\banner.bmp" left="0" name="CUIBanner1" top="0" width="510">
+											<imageposition imagealignment="iatopright"/>
+											<properties>
+												<property id="ImageName" name="Banner Bitmap" type="bitmap"/>
+											</properties>
+											<subtitle caption="[Dlg.StartInstall.SubTitle]" font="MS Sans Serif,8,$00000000,[]"/>
+											<title caption="[Dlg.StartInstall.Title]" font="MS Sans Serif,8,$00000000,[B]"/>
+										</banner>
+										<button anchors="right,bottom" caption="[All.Dialogs.Btn.Back]" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnBack" left="264" name="CUIButton3" sdpeh="ShowPrev" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<button anchors="right,bottom" caption="[All.Dialogs.Btn.Next]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnNext" left="339" name="CUIButton2" sdpeh="ShowNext" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<button anchors="right,bottom" cancel="1" caption="[All.Dialogs.Btn.Cancel]" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnCancel" left="425" name="CUIButton1" sdpeh="CancelSetupAsk" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<line anchors="left,right,bottom" id="CUILine1" left="0" linealign="lacustom" linelength="510" name="CUILine1" top="311"/>
+									</controls>
+									<engineevents/>
+									<gradient gradstartcolor="16711680"/>
+								</window>
+							</before>
+							<mainwindow background="gradient" bordericons="systemmenu,minimize" borderstyle="sizable" extflags="1" font="MS Sans Serif,8,0,[]" windowstate="maximized">
+								<controls>
+									<label caption="%AppName%" font="Arial,20,$00FFFFFF,[B]" id="Label2" name="Label2" transparent="1" useparentfont="0">
+										<intalign hoffset="8" voffset="3"/>
+									</label>
+									<label caption="%AppName%" font="Arial,20,$00808080,[B]" id="Label1" name="Label1" transparent="1" useparentfont="0">
+										<intalign hoffset="10" voffset="5"/>
+									</label>
+								</controls>
+								<gradient gradendcolor="0" gradstartcolor="16711680" gradtype="gttoptobottom"/>
+							</mainwindow>
+							<progress bordericons="systemmenu" caption="[All.Dialogs.Caption.Install]" font="MS Sans Serif,8,$00000000,[]" height="385" id="DLG_PROGRESS" left="0" name="Progress" top="0" visible="1" width="518">
+								<controls>
+									<label font="MS Sans Serif,8,$00000000,[]" height="13" id="CUICurrAction" left="23" name="CUILabel1" sdpeh="ShowCurrentAction" top="191" width="50">
+										<alignment/>
+										<shadow/>
+									</label>
+									<label autosize="0" caption="[Dlg.Progress.DlgText]" font="MS Sans Serif,8,$00000000,[]" height="75" id="CUILabel5" left="23" name="CUILabel5" top="93" width="465" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<label autosize="0" font="MS Sans Serif,8,$00000000,[]" height="16" id="CUILabelCurrProgress" left="23" name="CUILabel3" sdpeh="ShowCurrentItem" top="212" width="465">
+										<alignment/>
+										<shadow/>
+									</label>
+									<progressbar height="16" id="CUIOverallProgress" left="23" name="CUIProgressbar2" sdpeh="InstallProgress" smooth="1" top="234" width="465"/>
+									<url caption="%UrlText%" font="MS Sans Serif,8,$00FF0000,[]" height="13" hoverfont="MS Sans Serif,8,$00800080,[U]" id="CUIUrl1" left="22" name="CUIUrl1" top="305" url="%UrlLink%" useparentfont="0" width="80">
+										<paddings leftpadding="2" rightpadding="2"/>
+										<properties>
+											<property id="Caption" name="URL Name"/>
+											<property id="URL" name="URL Location"/>
+										</properties>
+									</url>
+									<banner color="16777215" height="64" id="CUIBanner1" imagename="%Presetup%\banner.bmp" left="0" name="CUIBanner1" top="0" width="510">
+										<imageposition imagealignment="iatopright"/>
+										<properties>
+											<property id="ImageName" name="Banner Bitmap" type="bitmap"/>
+										</properties>
+										<subtitle caption="[Dlg.Progress.SubTitle]" font="MS Sans Serif,8,$00000000,[]"/>
+										<title caption="[Dlg.Progress.Title]" font="MS Sans Serif,8,$00000000,[B]"/>
+									</banner>
+									<button anchors="right,bottom" cancel="1" caption="[All.Dialogs.Btn.Cancel]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnCancel" left="425" name="CUIButton1" sdpeh="CancelSetupAsk" top="325">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<line anchors="left,right,bottom" id="CUILine1" left="0" linealign="lacustom" linelength="510" name="CUILine1" top="311"/>
+								</controls>
+								<engineevents/>
+								<gradient gradstartcolor="16711680"/>
+							</progress>
+						</install>
+						<maintenance>
+							<progress bordericons="systemmenu" caption="[All.Dialogs.Caption.Maintenance]" condition="%SilentMode%<>1" font="MS Sans Serif,8,$00000000,[]" height="385" id="DLG_MNT_PROGRESS" left="0" name="Progress" top="0" visible="1" width="518">
+								<controls>
+									<label font="MS Sans Serif,8,$00000000,[]" height="13" id="CUICurrAction" left="23" name="CUILabel1" sdpeh="ShowCurrentAction" top="191" width="50">
+										<alignment/>
+										<shadow/>
+									</label>
+									<label autosize="0" caption="[Dlg.Progress.DlgText]" font="MS Sans Serif,8,$00000000,[]" height="55" id="CUILabel5" left="23" name="CUILabel5" top="93" width="465" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<label autosize="0" font="MS Sans Serif,8,$00000000,[]" height="16" id="CUILabelCurrProgress" left="23" name="CUILabel3" sdpeh="ShowCurrentItem" top="212" width="465">
+										<alignment/>
+										<shadow/>
+									</label>
+									<progressbar height="16" id="CUIOverallProgress" left="23" name="CUIProgressbar2" sdpeh="InstallProgress" smooth="1" top="234" width="465"/>
+									<url caption="%UrlText%" font="MS Sans Serif,8,$00FF0000,[]" height="13" hoverfont="MS Sans Serif,8,$00800080,[U]" id="CUIUrl1" left="22" name="CUIUrl1" top="305" url="%UrlLink%" useparentfont="0" width="80">
+										<paddings leftpadding="2" rightpadding="2"/>
+										<properties>
+											<property id="Caption" name="URL Name"/>
+											<property id="URL" name="URL Location"/>
+										</properties>
+									</url>
+									<banner color="16777215" height="64" id="CUIBanner1" imagename="%PRESETUP%\maintenance.bmp" left="0" name="CUIBanner1" top="0" width="510">
+										<imageposition imagealignment="iatopright"/>
+										<properties>
+											<property id="ImageName" name="Banner Bitmap" type="bitmap"/>
+										</properties>
+										<subtitle caption="[Dlg.Progress.SubTitle]" font="MS Sans Serif,8,$00000000,[]"/>
+										<title caption="[Dlg.Progress.Title]" font="MS Sans Serif,8,$00000000,[B]"/>
+									</banner>
+									<button anchors="right,bottom" cancel="1" caption="[All.Dialogs.Btn.Cancel]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnCancel" left="425" name="CUIButton1" sdpeh="CancelSetupAsk" top="325">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<line anchors="left,right,bottom" id="CUILine1" left="0" linealign="lacustom" linelength="510" name="CUILine1" top="311"/>
+								</controls>
+								<engineevents/>
+								<gradient gradstartcolor="16711680"/>
+							</progress>
+						</maintenance>
+						<plugdlg>
+							<window caption="[All.Dialogs.Caption.Install]" font="MS Sans Serif,8,$00000000,[]" height="135" id="DLG_OK" left="0" name="Message (Error)" top="0" visible="1" width="431">
+								<controls>
+									<label autosize="0" font="MS Sans Serif,8,$00000000,[]" height="50" id="CUILabel1" left="60" name="CUILabel1" top="14" width="348" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.OK]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton1" left="179" modalresult="mryes" name="CUIButton1" top="73">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<image height="32" id="CUIImage1" imagefilltype="iftcenter" imagename="%PRESETUP%\butt_warn.bmp" left="14" name="CUIImage1" top="16" transparent="1" transparentcolor="65280" width="32"/>
+								</controls>
+								<engineevents/>
+								<gradient gradendcolor="0" gradstartcolor="16711680" gradtype="gttoptobottom"/>
+							</window>
+							<window caption="[All.Dialogs.Caption.Install]" font="MS Sans Serif,8,$00000000,[]" height="135" id="DLG_OKCANCEL" left="0" name="Message (OK Cancel)" top="0" visible="1" width="431">
+								<controls>
+									<label autosize="0" font="MS Sans Serif,8,$00000000,[]" height="50" id="CUILabel1" left="60" name="CUILabel1" top="14" width="348" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.Cancel]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton2" left="218" modalresult="mrcancel" name="CUIButton2" top="73">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.OK]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton1" left="131" modalresult="mrok" name="CUIButton1" top="73">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<image height="32" id="CUIImage1" imagefilltype="iftcenter" imagename="%PRESETUP%\butt_warn.bmp" left="14" name="CUIImage1" top="16" transparent="1" transparentcolor="65280" width="32"/>
+								</controls>
+								<engineevents/>
+								<gradient gradendcolor="0" gradstartcolor="16711680" gradtype="gttoptobottom"/>
+							</window>
+							<window caption="[All.Dialogs.Caption.Install]" font="MS Sans Serif,8,$00000000,[]" height="135" id="DLG_YESNO" left="0" name="Message (Yes No)" top="0" visible="1" width="431">
+								<controls>
+									<label autosize="0" font="MS Sans Serif,8,$00000000,[]" height="50" id="CUILabel1" left="60" name="CUILabel1" top="14" width="348" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.No]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton2" left="218" modalresult="mrno" name="CUIButton2" top="73">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.Yes]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton1" left="131" modalresult="mryes" name="CUIButton1" top="73">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<image height="32" id="CUIImage1" imagefilltype="iftcenter" imagename="%Presetup%\butt_que.bmp" left="14" name="CUIImage1" top="16" transparent="1" transparentcolor="65280" width="32"/>
+								</controls>
+								<engineevents/>
+								<gradient gradendcolor="0" gradstartcolor="16711680" gradtype="gttoptobottom"/>
+							</window>
+						</plugdlg>
+						<syswnd>
+							<askabort bordericons="systemmenu" caption="[All.Dialogs.Caption.Install]" font="MS Sans Serif,8,$00000000,[]" height="135" id="DLG_ABORTINSTALLATION" left="0" name="Abort Installation" top="0" visible="1" width="431">
+								<controls>
+									<label autosize="0" caption="[Strings.1]" font="MS Sans Serif,8,$00000000,[]" height="50" id="CUILabel1" left="60" name="CUILabel1" top="14" width="348" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.No]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton2" left="218" modalresult="mrno" name="CUIButton2" top="73">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.Yes]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton1" left="131" modalresult="mryes" name="CUIButton1" top="73">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<image height="32" id="CUIImage1" imagefilltype="iftcenter" imagename="%Presetup%\butt_que.bmp" left="14" name="CUIImage1" top="16" transparent="1" transparentcolor="65280" width="32"/>
+								</controls>
+								<engineevents/>
+								<gradient gradendcolor="0" gradstartcolor="16711680" gradtype="gttoptobottom"/>
+							</askabort>
+							<askpackage caption="[Dlg.Package.Title]" font="MS Sans Serif,8,$00000000,[]" height="248" id="DLG_PACKAGELOCATION" left="0" name="Package Location" top="0" visible="1" width="477">
+								<controls>
+									<button anchors="top,left,right" caption="[All.Dialogs.Btn.Browse]" font="MS Sans Serif,8,$00000000,[]" height="21" id="CUIButton3" left="369" top="110">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<path anchors="top,left,right" browsebutton="CUIButton3" browsedlgcaption="Browse For Folder" browsedlgprompt="Select folder for application install:" font="MS Sans Serif,8,$00000000,[]" height="21" id="CUIPathControl1" left="20" name="CUIPathControl1" top="110" varlink="PackageLocation" width="344">
+										<scrolling autovscroll="0"/>
+									</path>
+									<groupbox anchors="top,left,right" caption="[Dlg.Package.DlgText.GroupBox]" font="MS Sans Serif,8,$00000000,[]" height="64" id="CUIGroupbox1" left="12" name="CUIGroupbox1" top="86" width="442"/>
+									<label anchors="top,left,right" autosize="0" caption="[Dlg.Package.DlgText]" font="MS Sans Serif,8,$00000000,[]" height="66" id="CUILabel2" left="54" name="CUILabel2" top="14" width="400" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.Cancel]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton2" left="380" modalresult="mrcancel" name="CUIButton2" top="189">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.OK]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton1" left="293" modalresult="mrok" name="CUIButton1" top="189">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<image height="32" id="CUIImage1" imagefilltype="iftcenter" imagename="%Presetup%\butt_inf.bmp" left="14" name="CUIImage1" top="16" transparent="1" transparentcolor="65280" width="32"/>
+								</controls>
+								<engineevents/>
+								<gradient gradendcolor="0" gradstartcolor="16711680" gradtype="gttoptobottom"/>
+							</askpackage>
+							<askreboot caption="[All.Dialogs.Caption.Install]" font="MS Sans Serif,8,$00000000,[]" height="385" id="DLG_REBOOT" left="0" name="Reboot" top="0" visible="1" width="518">
+								<controls>
+									<radiobutton caption="[All.Dialogs.Checkbox.RebootNo]" font="MS Sans Serif,8,$00000000,[]" id="CUIRadiobuttonNo" left="44" name="CUIRadiobutton2" top="193" width="444">
+										<alignment/>
+									</radiobutton>
+									<radiobutton caption="[All.Dialogs.Checkbox.RebootYes]" checked="1" font="MS Sans Serif,8,$00000000,[]" group="1" id="CUIRadiobuttonYes" left="44" name="CUIRadiobutton1" top="164" width="444">
+										<alignment/>
+									</radiobutton>
+									<label autosize="0" caption="[Dlg.Reboot.DlgText]" font="MS Sans Serif,8,$00000000,[]" height="52" id="CUILabel1" left="23" name="CUILabel1" top="100" width="465" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<url caption="%UrlText%" font="MS Sans Serif,8,$00FF0000,[]" height="13" hoverfont="MS Sans Serif,8,$00800080,[U]" id="CUIUrl1" left="23" name="CUIUrl1" top="305" url="%UrlLink%" useparentfont="0" width="54">
+										<paddings leftpadding="2" rightpadding="2"/>
+										<properties>
+											<property id="Caption" name="URL Name"/>
+											<property id="URL" name="URL Location"/>
+										</properties>
+									</url>
+									<banner color="16777215" height="64" id="CUIBanner1" imagename="%Presetup%\banner.bmp" left="0" name="CUIBanner1" top="0" width="510">
+										<imageposition imagealignment="iatopright"/>
+										<properties>
+											<property id="ImageName" name="Banner Bitmap" type="bitmap"/>
+										</properties>
+										<subtitle caption="[Dlg.Reboot.SubTitle]" font="MS Sans Serif,8,$00000000,[]"/>
+										<title caption="[Dlg.Reboot.Title]" font="MS Sans Serif,8,$00000000,[B]"/>
+									</banner>
+									<button caption="[All.Dialogs.Btn.Next]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnNext" left="339" modalresult="mrok" name="CUIButton2" sdpeh="ShowNext" top="325">
+										<alignment halign="ahcenter" valign="avcenter"/>
+										<onclick>
+											<action expression='AllowReboot:= GetProp("CUIRadiobuttonYes.Checked")'/>
+										</onclick>
+									</button>
+									<button anchors="right,bottom" cancel="1" caption="[All.Dialogs.Btn.Cancel]" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnCancel" left="425" modalresult="mrcancel" name="CUIButton1" sdpeh="CancelSetupAsk" top="325">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<line anchors="left,right,bottom" id="CUILine1" left="0" linealign="lacustom" linelength="510" name="CUILine1" top="311"/>
+								</controls>
+								<engineevents/>
+								<gradient gradstartcolor="16711680"/>
+							</askreboot>
+							<askrepair bordericons="systemmenu" caption="[All.Dialogs.Caption.Maintenance]" condition="%MaintenanceMode%=0" font="MS Sans Serif,8,$00000000,[]" height="385" id="DLG_MNT_START" left="0" name="Maintenance" top="0" visible="1" width="518">
+								<controls>
+									<url caption="%UrlText%" cursor="arrow" font="MS Sans Serif,8,$00FF0000,[]" height="13" hoverfont="MS Sans Serif,8,$00800080,[U]" id="CUIUrl1" left="23" name="CUIUrl1" top="305" url="%UrlLink%" useparentfont="0" width="54">
+										<paddings leftpadding="2" rightpadding="2"/>
+									</url>
+									<banner color="16777215" height="64" id="CUIBanner1" imagename="%PRESETUP%\maintenance.bmp" left="0" name="CUIBanner1" top="0" width="510">
+										<imageposition imagealignment="iacenterright"/>
+										<subtitle caption="[Dlg.Maintenance.DlgStart.SubTitle]" font="MS Sans Serif,8,$00000000,[]"/>
+										<title caption="[Dlg.Maintenance.DlgStart.Title]" font="MS Sans Serif,8,$00000000,[B]"/>
+									</banner>
+									<line anchors="left,right,bottom" id="CUILine1" left="0" linealign="lacustom" linelength="510" name="CUILine1" top="311"/>
+									<label autosize="0" caption="[Dlg.Maintenance.DlgStart.ModifyDesc]" font="MS Sans Serif,8,$00000000,[]" height="49" id="CUILabel5" left="43" name="CUILabel5" top="233" transparent="1" useparentfont="0" width="445" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<radiobutton caption="[Dlg.Maintenance.DlgStart.Modify]" font="MS Sans Serif,8,$00000000,[B]" id="CUIRadiobuttonAddRemove" left="23" name="CUIRadiobutton3" top="217" transparent="1" useparentfont="0" width="465">
+										<alignment/>
+									</radiobutton>
+									<label autosize="0" caption="[Dlg.Maintenance.DlgStart.RepairDesc]" font="MS Sans Serif,8,$00000000,[]" height="51" id="CUILabel4" left="43" name="CUILabel4" top="164" transparent="1" useparentfont="0" width="445" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<radiobutton caption="[Dlg.Maintenance.DlgStart.Repair]" font="MS Sans Serif,8,$00000000,[B]" id="CUIRadiobuttonRepair" left="23" name="CUIRadiobutton2" top="147" transparent="1" useparentfont="0" width="465">
+										<alignment/>
+									</radiobutton>
+									<label autosize="0" caption="[Dlg.Maintenance.DlgStart.UninstallDesc]" font="MS Sans Serif,8,$00000000,[]" height="46" id="CUILabel3" left="43" name="CUILabel3" top="98" transparent="1" useparentfont="0" width="445" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+									<radiobutton caption="[Dlg.Maintenance.DlgStart.Uninstall]" checked="1" font="MS Sans Serif,8,$00000000,[B]" group="1" id="CUIRadiobuttonUninstall" left="23" name="CUIRadiobutton1" top="81" transparent="1" useparentfont="0" width="465">
+										<alignment/>
+									</radiobutton>
+									<button anchors="right" caption="[All.Dialogs.Btn.Next]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnNext" left="339" name="CUIButton2" sdpeh="ShowNext" top="325">
+										<alignment halign="ahcenter" valign="avcenter"/>
+										<onclick>
+											<if expression='GetProp("CUIRadiobuttonAddRemove.Checked")'>
+												<then>
+													<action expression="InstallMode:=2"/>
+													<action expression="MaintenanceMode:=1"/>
+												</then>
+											</if>
+											<if expression='GetProp("CUIRadiobuttonRepair.Checked")'>
+												<then>
+													<action expression="InstallMode:=2"/>
+													<action expression="MaintenanceMode:=2"/>
+												</then>
+											</if>
+											<if expression='GetProp("CUIRadiobuttonUninstall.Checked")'>
+												<then>
+													<action expression="InstallMode:=1"/>
+													<action expression="MaintenanceMode:=0"/>
+												</then>
+											</if>
+										</onclick>
+									</button>
+									<button anchors="right,bottom" cancel="1" caption="[All.Dialogs.Btn.Cancel]" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnCancel" left="425" name="CUIButton1" sdpeh="CancelSetupAsk" top="325">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+								</controls>
+								<engineevents/>
+								<gradient gradstartcolor="16711680"/>
+								<oncreate>
+									<action expression='HasFeatures:=(SendMessage("CM_GETFEATURE",CreateParams(""),0,0,1))'/>
+									<if expression="%HasFeatures%=0">
+										<else>
+											<action expression='SetProp("CUILabel5.Font", "MS Sans Serif,8,$80000011,[]")'/>
+											<action expression="SetProp('CUIRadioButtonAddRemove.Enabled','0')"/>
+										</else>
+										<then>
+											<action expression="SetProp('CUIRadioButtonAddRemove.Enabled','1')"/>
+										</then>
+									</if>
+								</oncreate>
+							</askrepair>
+							<browsedialog bordericons="systemmenu" caption="[Dlg.Browse.Title.Browse]" font="MS Sans Serif,8,$00000000,[]" height="388" id="DLG_BROWSEFOLDER" left="0" name="Browse" top="0" visible="1" width="344">
+								<controls>
+									<edit anchors="left,right,bottom" font="MS Sans Serif,8,$00000000,[]" height="21" id="CUIEdtPath" left="16" name="CUIEdit1" readonly="1" top="287" varlink="InstallPath" width="304">
+										<scrolling autovscroll="0"/>
+									</edit>
+									<dirtree anchors="top,left,right,bottom" font="MS Sans Serif,8,$00000000,[]" fullrowselect="1" height="239" id="CUIDirTree" left="16" name="CUIDirTree1" newdirbutton="CUIBtnCreate" selpathedit="CUIEdtPath" showroot="0" top="37" width="304"/>
+									<label caption="[Dlg.Browse.DlgText.SelectFolder]" font="MS Sans Serif,8,$00000000,[]" height="13" id="CUILabel1" left="16" name="CUILabel1" top="11" width="162">
+										<alignment/>
+										<shadow/>
+									</label>
+									<button anchors="left,bottom" caption="[All.Dialogs.Btn.Create]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIBtnCreate" left="16" name="CUIButton3" top="329">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.Cancel]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton2" left="247" modalresult="mrcancel" name="CUIButton2" top="329">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.OK]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton1" left="160" modalresult="mrok" name="CUIButton1" top="329">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+								</controls>
+								<engineevents/>
+								<gradient gradendcolor="0" gradstartcolor="16711680" gradtype="gttoptobottom"/>
+							</browsedialog>
+							<verconflict caption="[Dlg.VersionConflict.Title]" font="MS Sans Serif,8,$00000000,[]" height="259" id="DLG_FILEVERSIONCONFLICT" left="0" name="File Version Conflict" top="0" visible="1" width="409">
+								<controls>
+									<image height="32" id="CUIImage1" imagefilltype="iftcenter" imagename="%Presetup%\butt_que.bmp" left="23" name="CUIImage1" top="20" transparent="1" transparentcolor="65280" width="32"/>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.NoAll]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton4" left="291" modalresult="mrnotoall" name="CUIButton4" top="200">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.No]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton3" left="206" modalresult="mrno" name="CUIButton3" top="200">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.YesAll]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton2" left="121" modalresult="mryestoall" name="CUIButton2" top="200">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<button anchors="right,bottom" caption="[All.Dialogs.Btn.Yes]" font="MS Sans Serif,8,$00000000,[]" height="23" id="CUIButton1" left="36" modalresult="mryes" name="CUIButton1" top="200">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<edit anchors="top,left,right,bottom" color="-2147483644" font="MS Sans Serif,8,$00000000,[]" height="21" id="CUIEdit2" left="128" name="CUIEdit2" top="138" width="252">
+										<oncreate>
+											<action expression='SetProp("CUIEdit1.Text", FilePath(%ConflictFile%))'/>
+										</oncreate>
+										<scrolling autovscroll="0"/>
+									</edit>
+									<label autosize="0" caption="[All.Dialogs.DlgText.LocatedIn]" font="MS Sans Serif,8,$00000000,[]" height="13" id="CUILabel3" left="23" name="CUILabel3" top="143" width="97">
+										<alignment/>
+										<shadow/>
+									</label>
+									<edit anchors="top,left,right,bottom" color="-2147483644" font="MS Sans Serif,8,$00000000,[]" height="21" id="CUIEdit1" left="128" name="CUIEdit1" readonly="1" top="107" width="252">
+										<oncreate>
+											<action expression='SetProp("CUIEdit1.Text", FileName(%ConflictFile%))'/>
+										</oncreate>
+										<scrolling autovscroll="0"/>
+									</edit>
+									<label autosize="0" caption="[All.Dialogs.DlgText.FileName]" font="MS Sans Serif,8,$00000000,[]" height="13" id="CUILabel2" left="23" name="CUILabel2" top="113" width="97">
+										<alignment/>
+										<shadow/>
+									</label>
+									<label anchors="top,left,right,bottom" autosize="0" caption="[Dlg.VersionConflict.DlgText]" font="MS Sans Serif,8,$00000000,[]" height="70" id="CUILabel1" left="64" name="CUILabel1" top="18" width="316" wordbreak="1">
+										<alignment/>
+										<shadow/>
+									</label>
+								</controls>
+								<engineevents/>
+								<gradient gradendcolor="0" gradstartcolor="16711680" gradtype="gttoptobottom"/>
+							</verconflict>
+						</syswnd>
+						<uninstall>
+							<before>
+								<window caption="[All.Dialogs.Caption.Uninstall]" font="MS Sans Serif,8,$00000000,[]" height="385" id="DLG_UNINST_BEFORE" left="0" name="Before" top="0" visible="1" width="518">
+									<controls>
+										<label autosize="0" caption="[Dlg.Uninstall.Before.Title]" font="MS Sans Serif,10,$00000000,[B]" height="34" id="CUILabel1" left="210" name="CUILabel1" top="26" transparent="1" useparentfont="0" width="290" wordbreak="1">
+											<alignment/>
+											<shadow/>
+										</label>
+										<label autosize="0" caption="[Dlg.Uninstall.Before.DlgText]" font="MS Sans Serif,8,$00000000,[]" height="206" id="CUILabel2" left="210" name="CUILabel2" top="72" transparent="1" width="290" wordbreak="1">
+											<alignment/>
+											<shadow/>
+										</label>
+										<watermark anchors="top,left,right,bottom" color="16777215" height="311" id="CUIWatermark1" imagename="%PRESETUP%\unwatermark.bmp" left="0" name="CUIWatermark1" top="0" width="510"/>
+										<button anchors="right,bottom" caption="[All.Dialogs.Btn.Next]" default="1" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnNext" left="339" name="CUIButton2" sdpeh="ShowNext" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+										<button anchors="right,bottom" cancel="1" caption="[All.Dialogs.Btn.Cancel]" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnCancel" left="425" name="CUIButton1" sdpeh="CancelSetupAsk" top="325">
+											<alignment halign="ahcenter" valign="avcenter"/>
+										</button>
+									</controls>
+									<engineevents/>
+									<gradient gradstartcolor="16711680"/>
+								</window>
+							</before>
+							<progress bordericons="systemmenu" caption="[All.Dialogs.Caption.Uninstall]" condition="%SilentMode%<>1" font="MS Sans Serif,8,$00000000,[]" height="385" id="UN_UNINST_PROGRESS" left="0" name="Progress" top="0" visible="1" width="518">
+								<controls>
+									<label autosize="0" font="MS Sans Serif,8,$00000000,[]" height="13" id="CUICurrItem" left="23" name="CUILabel2" sdpeh="ShowCurrentItem" top="216" width="465">
+										<alignment/>
+										<shadow/>
+									</label>
+									<label font="MS Sans Serif,8,$00000000,[]" height="13" id="CUICurrAction" left="23" name="CUILabel1" sdpeh="ShowCurrentAction" top="191" width="50">
+										<alignment/>
+										<shadow/>
+									</label>
+									<progressbar anchors="top,left,right" height="16" id="CUIOverallProgress" left="23" name="CUIProgressbar2" sdpeh="InstallProgress" smooth="1" top="234" width="465"/>
+									<url caption="%UrlText%" font="MS Sans Serif,8,$00FF0000,[]" height="13" hoverfont="MS Sans Serif,8,$00800080,[U]" id="CUIUrl1" left="23" name="CUIUrl1" top="305" url="%UrlLink%" useparentfont="0" width="54">
+										<paddings leftpadding="2" rightpadding="2"/>
+										<properties>
+											<property id="Caption" name="URL Name"/>
+											<property id="URL" name="URL Location"/>
+										</properties>
+									</url>
+									<banner color="16777215" height="64" id="CUIBanner1" imagename="%PRESETUP%\unbanner.bmp" left="0" name="CUIBanner1" top="0" width="510">
+										<imageposition imagealignment="iatopright"/>
+										<properties>
+											<property id="ImageName" name="Banner Bitmap" type="bitmap"/>
+										</properties>
+										<subtitle caption="[Dlg.Uninstall.Progress.SubTitle]" font="MS Sans Serif,8,$00000000,[]"/>
+										<title caption="[Dlg.Uninstall.Progress.Title]" font="MS Sans Serif,8,$00000000,[B]"/>
+									</banner>
+									<button anchors="right,bottom" cancel="1" caption="[All.Dialogs.Btn.Cancel]" default="1" enabled="0" font="MS Sans Serif,8,$00000000,[]" height="23" id="BtnCancel" left="425" name="CUIButton1" sdpeh="CancelSetupAsk" top="325">
+										<alignment halign="ahcenter" valign="avcenter"/>
+									</button>
+									<line anchors="left,right,bottom" id="CUILine1" left="0" linealign="lacustom" linelength="510" name="CUILine1" top="311"/>
+								</controls>
+								<engineevents/>
+								<gradient gradstartcolor="16711680"/>
+							</progress>
+						</uninstall>
+					</customconfig>
+				</plugin>
+			</plugins>
+			<presetup>
+				<file src="%Images%\banner.bmp"/>
+				<file src="%Images%\watermark.bmp"/>
+				<file src="%Images%\sysdlgs\butt_warn.bmp"/>
+				<file src="%Images%\sysdlgs\butt_cancel.bmp"/>
+				<file src="%Images%\sysdlgs\butt_inf.bmp"/>
+				<file src="%Images%\sysdlgs\butt_que.bmp"/>
+				<file src="%Images%\unbanner.bmp"/>
+				<file src="%Images%\unwatermark.bmp"/>
+				<file src="%Images%\maintenance.bmp"/>
+				<file src="D:\Work\Programs\ATools\readme.rtf"/>
+			</presetup>
+		</package>
+	</packages>
+	<variables>
+		<var name="AppID" value="{1D95C059-AFA9-4550-B7AD-C5E00ED31F14}"/>
+		<var name="AppName" value="A-Tools"/>
+		<var name="CompanyName" value="Stark IT-Service"/>
+		<var name="AppHomeURL" value="http://www.a-tools.com"/>
+		<var name="AppComments" value="The easy way to work!"/>
+		<var name="OutputPath" value="D:\Work\Programs\ATools"/>
+		<var name="CompressionLevel" value="7"/>
+		<var name="AutoSelectLanguage" value="1"/>
+		<var name="Uninstall" value="1"/>
+		<var name="ProgramGroup" value="%AppName%"/>
+		<var name="AppFolder" value="%ProgramsMenu%\%ProgramGroup%"/>
+		<var name="InstallPath" value="%ProgramFiles%\%AppName%"/>
+		<var name="RemoveOldReferences" value="1"/>
+		<var name="Reboot" value="0"/>
+		<var name="AppSupportURL" value="http://www.a-tools.com"/>
+		<var name="SupportedOS" value="NT,9X"/>
+		<var name="UninstallTitleFont" value="Tahoma,8,$000000"/>
+		<var name="DontPackFiles" value="0"/>
+		<var name="AppSupportContact" value="Oleg Chensky"/>
+		<var name="AppSupportPhone" value="+49 (173) 2889443"/>
+		<var name="AppVersion" value="4.1"/>
+		<var name="AppUpdateURL" value="http://www.a-tools.com"/>
+		<var name="OldStylePresetupWindow" value="1"/>
+		<var name="UninstallSubtitleFont" value="Tahoma, 8, 0,"/>
+		<var name="UninstallDialogFont" value="Tahoma, 8, 0,"/>
+		<var name="UrlText" value="Stark IT-Service"/>
+		<var name="UrlLink" value="http://www.start-it.de"/>
+		<var name="AppIcon" value="%InstallPath%\atools.exe"/>
+	</variables>
+</giproject>

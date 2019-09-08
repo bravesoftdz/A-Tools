@@ -1,0 +1,41 @@
+[Version]
+Signature		= $CHICAGO$
+Provider		= %COMPANY%
+Compatible		= 1
+AdvancedINF		= 2.5,%NEWVERNEEDED%
+
+[SourceDisksNames]
+1			= %PROG%,,1
+
+[SourceDisksFiles]
+atools.exe		= 1
+
+[Prog.Files]
+atools.exe
+
+[DestinationDirs]
+Prog.Files		= 49001
+
+[CustomDirs]
+49001			= Custom49001,7
+
+[Custom49001]
+"HKLM","%RKPROG%","","%PROG% was installed not correctly.",""
+
+[PreSetupCommands]
+%01%\atools.exe /shutdown
+
+[PostSetupCommands]
+%49001%\atools.exe
+
+[DefaultInstall]
+CustomDestination	= CustomDirs
+CopyFiles		= Prog.Files
+RunPreSetupCommands	= PreSetupCommands
+RunPostSetupCommands	= PostSetupCommands:2
+
+[Strings]
+COMPANY			= "Chensky IT-Services"
+NEWVERNEEDED		= "You need a newer version of advpack.dll. Sorry..."
+PROG			= "A-Tools"
+RKPROG			= "Software\Chensky IT-Services\A-Tools"

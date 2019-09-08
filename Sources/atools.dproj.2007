@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{4b286028-2152-424a-b754-ae66b31a4397}</ProjectGuid>
+    <MainSource>atools.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>..\..\atools.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_ExeOutput>..\..</DCC_ExeOutput>
+    <DCC_Define>RELEASE</DCC_Define>
+    <DCC_SYMBOL_PLATFORM>False</DCC_SYMBOL_PLATFORM>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_ExeOutput>..\..</DCC_ExeOutput>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_SYMBOL_PLATFORM>False</DCC_SYMBOL_PLATFORM>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Language><Language Name="ProjectLang">$00000407</Language></Language><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">4</VersionInfo><VersionInfo Name="MinorVer">1</VersionInfo><VersionInfo Name="Release">2</VersionInfo><VersionInfo Name="Build">213</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1033</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName">Stark IT-Service</VersionInfoKeys><VersionInfoKeys Name="FileDescription">A-Tools main module</VersionInfoKeys><VersionInfoKeys Name="FileVersion">4.1.2.213</VersionInfoKeys><VersionInfoKeys Name="InternalName">ATOOLS.EXE</VersionInfoKeys><VersionInfoKeys Name="LegalCopyright">© 1996 - 2006 Stark IT-Service</VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename">ATOOLS.EXE</VersionInfoKeys><VersionInfoKeys Name="ProductName">A-Tools</VersionInfoKeys><VersionInfoKeys Name="ProductVersion">4.1</VersionInfoKeys><VersionInfoKeys Name="Comments">Powered by Oleg Chensky</VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">atools.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="atools.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\uCProcs.pas" />
+    <DCCReference Include="..\uData.pas" />
+    <DCCReference Include="..\uProcs.pas" />
+    <DCCReference Include="..\uThreads.pas" />
+    <DCCReference Include="P:\Repository\uForm.pas">
+      <Form>frmForm</Form>
+      <DesignClass>TTntForm</DesignClass>
+    </DCCReference>
+    <DCCReference Include="uAPPForm.pas">
+      <Form>frmAPPForm</Form>
+    </DCCReference>
+    <DCCReference Include="uFileMover.pas" />
+    <DCCReference Include="uFormProcs.pas" />
+    <DCCReference Include="uMain.pas">
+      <Form>frmMain</Form>
+    </DCCReference>
+    <DCCReference Include="uNotes.pas">
+      <Form>frmNote</Form>
+    </DCCReference>
+    <DCCReference Include="uProps.pas">
+      <Form>frmProps</Form>
+    </DCCReference>
+    <DCCReference Include="uRuler.pas">
+      <Form>frmRuler</Form>
+    </DCCReference>
+    <DCCReference Include="uScreenInfo.pas">
+      <Form>frmScreenInfo</Form>
+    </DCCReference>
+    <DCCReference Include="uTools.pas">
+      <Form>frmTools</Form>
+      <DesignClass>TTntForm</DesignClass>
+    </DCCReference>
+  </ItemGroup>
+</Project>
