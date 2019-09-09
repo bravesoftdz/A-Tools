@@ -32,8 +32,6 @@ procedure DoTrayCommand(ID, SCAction: DWORD; DeleteTrayIcon: Boolean);
 
 function GetIconHandleFromFileName(FName: String): HICON;
 
-procedure DoOptimizeMemory;
-
 implementation
 
 uses
@@ -298,22 +296,6 @@ function GetIconHandleFromFileName(FName: String): HICON;
 begin
   SHGetFileInfo(PChar(FName), 0, shInfo, SizeOf(shInfo), SHGFI_ICON or SHGFI_OPENICON or SHGFI_SHELLICONSIZE or SHGFI_SMALLICON or SHGFI_SYSICONINDEX);
   Result := shInfo.hIcon;
-end;
-
-procedure DoOptimizeMemory;
- var
-   I: Integer;
-   hProcess: THandle;
-begin
-  ProcessRefresh(False, False);
-  for I := 0 to ProcessList.Count - 1 do begin
-    hProcess := OpenProcess(PROCESS_ALL_ACCESS, False, ProcessList.Processes[I].Id);
-    if hProcess > 0 then try
-      if not SetProcessWorkingSetSize(hProcess, High(SIZE_T), High(SIZE_T)) then DBG('SetProcessWorkingSetSize: ' + ProcessList.Processes[I].FileName + ' - ' + icsGetLastErrorText);
-    finally
-      CloseHandle(hProcess);
-    end;
-  end;
 end;
 
 end.
