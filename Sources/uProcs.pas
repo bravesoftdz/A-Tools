@@ -144,30 +144,6 @@ begin
   if not RegGetBinary(HKEY_CURRENT_USER, REG_NOTES_KEY + '\' + Id, 'Params', @Result, SizeOf(Result)) then FillChar(Result, SizeOf(Result), 0);
 end;
 
-{
-
-      seOk: MessageBeep(MB_ICONINFORMATION);
-      seError: MessageBeep(MB_ICONEXCLAMATION);
-
-
-
-function GetLocalIP: String;
- const WSVer = $101; // ver 1.1, MakeWord(1, 1);
- var
-   wsaData: TWSAData;
-   P: PHostEnt;
-   Buf: array [0..127] of Char;
-begin
-  Result := '';
-  if WSAStartup(WSVer, wsaData) = 0 then begin
-    if GetHostName(@Buf, 128) = 0 then begin
-      P := GetHostByName(@Buf);
-      if P <> nil then Result := iNet_ntoa(PInAddr(p^.h_addr_list^)^);
-    end;
-    WSACleanup;
-  end;
-end;}
-
 procedure UnregisterHotKeys;
  var I: Integer;
 begin
@@ -233,16 +209,6 @@ begin
   ST.wSecond := TempST.wSecond;
   ST.wMilliseconds := TempST.wMilliseconds;
 end;
-
-{procedure RefreshSystemTime(var ST: TSystemTime; T: DWORD);
-begin
-  GetLocalTime(ST);
-  ST.wHour := 0;
-  ST.wMinute := 0;
-  ST.wSecond := 0;
-  ST.wMilliseconds := 0;
-  IncSystemTime(ST, T);
-end;}
 
 function GetIntVersion(Version: String): Integer;
 begin

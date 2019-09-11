@@ -84,6 +84,7 @@
         <DCC_ExeOutput>..\</DCC_ExeOutput>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>system</AppDPIAwarenessMode>
+        <OutputExt>x32.exe</OutputExt>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <SanitizedProjectName>atools</SanitizedProjectName>
@@ -95,6 +96,7 @@
         <DCC_ExeOutput>..\</DCC_ExeOutput>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>system</AppDPIAwarenessMode>
+        <OutputExt>x64.exe</OutputExt>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_DependencyCheckOutputName>..\..\atools.exe</DCC_DependencyCheckOutputName>

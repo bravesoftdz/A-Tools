@@ -26,7 +26,7 @@ const
 var
   hMapFileObject: THandle = 0;
 
-function CreateOrOpenSharedFile: Boolean;
+function CreateOrOpenSharedFile: Boolean;   // not needed now. stay from Hooks and DLLs versions
  var Init: Boolean;
 begin
   hMapFileObject := CreateFileMapping(INVALID_HANDLE_VALUE, nil, PAGE_READWRITE, 0, SizeOf(TMemFile), SHARED_MEM_FILE);
